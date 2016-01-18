@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116110253) do
+ActiveRecord::Schema.define(version: 20160117062712) do
 
   create_table "grades", force: :cascade do |t|
     t.string   "name"
@@ -55,25 +55,19 @@ ActiveRecord::Schema.define(version: 20160116110253) do
   end
 
   create_table "score_boards", force: :cascade do |t|
-    t.integer  "subject_id"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "score_student_subjects", force: :cascade do |t|
-    t.integer  "score_id"
-    t.integer  "subject_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.integer  "subject_group_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
   create_table "scores", force: :cascade do |t|
     t.float    "value"
     t.integer  "score_type"
     t.integer  "student_score_board_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "student_subject_group_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "student_groups", force: :cascade do |t|
@@ -90,6 +84,14 @@ ActiveRecord::Schema.define(version: 20160116110253) do
     t.datetime "updated_at",     null: false
   end
 
+  create_table "student_subject_groups", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "subject_group_id"
+    t.integer  "score_board_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "student_subjects", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "subject_id"
@@ -99,12 +101,12 @@ ActiveRecord::Schema.define(version: 20160116110253) do
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
-    t.string   "midle_name"
+    t.string   "middle_name"
     t.string   "last_name"
     t.integer  "group_id"
     t.integer  "parrent_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "subject_groups", force: :cascade do |t|
@@ -129,6 +131,7 @@ ActiveRecord::Schema.define(version: 20160116110253) do
 
   create_table "teachers", force: :cascade do |t|
     t.string   "name"
+    t.integer  "school_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
