@@ -4,6 +4,7 @@ class CreateScores < ActiveRecord::Migration
       t.float :value
       t.integer :score_type
       t.integer :student_score_board_id
+      t.integer :student_subject_group_id
 
       t.timestamps null: false
     end
